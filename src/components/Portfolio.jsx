@@ -1,268 +1,231 @@
-import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 const projects = [
   {
     id: 1,
-    name: 'AI-Powered Salon Website',
-    client: 'Salon Owner',
-    type: 'Websites',
-    tag: 'WEB + AI',
-    color: '#8B5CF6',
-    problem: 'Wrong haircuts due to lack of information. Missed leads. Manual appointment chaos.',
-    solution: [
-      'AI face-shape analysis for personalized hairstyle recommendations',
-      'Skin & hair analysis for treatment suggestions',
-      'Automated lead capture → Google Sheets → Auto-callback',
-      'Zero missed opportunities, maximum creative freedom',
-    ],
-    impact: 'Salon owner focuses on artistry, not admin. Revenue ↑ Stress ↓',
-    stack: 'React · Node.js · OpenAI · Google Sheets API',
+    name: 'AI Salon Website',
+    desc: 'Smart haircut & style recommendations',
+    link: 'https://ai-salon-website-two.vercel.app/',
+    color: '#8B5CF6', // Violet
   },
   {
     id: 2,
-    name: 'QMap — Navigate Safely',
-    client: 'Gen Z Users',
-    type: 'Apps',
-    tag: 'APP',
-    color: '#A78BFA',
-    problem: "Existing maps don't show crowd levels, safety data, or real-time local intel.",
-    solution: [
-      'Real-time crowd density heat maps',
-      'Safety zone alerts (accident-prone & crime areas)',
-      'Introverts can find quiet spots',
-      'Community-powered updates + temperature data',
-    ],
-    impact: 'People reach destinations safely, confidently, and comfortably.',
-    stack: 'React · Mapbox GL · Supabase · Vite',
+    name: 'QMap',
+    desc: 'Navigate safely with real-time crowd data',
+    link: 'https://qmap-beta.vercel.app/',
+    color: '#3B82F6', // Blue
   },
   {
     id: 3,
-    name: 'Tiu — Personal Brand Portfolio',
-    client: 'Model & Creator',
-    type: 'Websites',
-    tag: 'WEB',
-    color: '#C4B5FD',
-    problem: "Instagram isn't enough. Brands can't find contact info. Lead management chaos.",
-    solution: [
-      'Stunning portfolio showcasing personality & collaborations',
-      'Automated inquiry → Google Sheets → Appointment scheduling',
-      'Smart notification system',
-      'Optional personalized management app',
-    ],
-    impact: 'Tiu focuses on craft, not chasing leads. Bookings automated. Revenue soaring.',
-    stack: 'React · Tailwind · Google Sheets API · Framer Motion',
+    name: 'Tiu Brand',
+    desc: 'Model & Creator portfolio and management',
+    link: 'https://tiu-beauty-site.vercel.app/',
+    color: '#EC4899', // Pink
   },
   {
     id: 4,
-    name: 'Cold Outreach AI Agent',
-    client: 'Sales Teams',
-    type: 'AI Agents',
-    tag: 'AI AGENT',
-    color: '#7C3AED',
-    problem: 'Sales teams waste hours writing repetitive cold emails and DMs.',
-    solution: [
-      'Input company name → AI generates personalized cold emails',
-      'LinkedIn DM scripts generated instantly',
-      'Scales outreach 10x without extra headcount',
-      'Human creativity freed for closing deals',
-    ],
-    impact: 'Sales teams focus on relationships, not repetitive writing.',
-    stack: 'Python · Claude API · n8n · Gmail API',
+    name: 'Cold Outreach',
+    desc: 'Automated AI sales and outreach agent',
+    link: 'https://sga1-pi.vercel.app/',
+    color: '#10B981', // Emerald
   },
   {
     id: 5,
-    name: 'Content Repurposing Agent',
-    client: 'Creators',
-    type: 'AI Agents',
-    tag: 'AI AGENT',
-    color: '#8B5CF6',
-    problem: 'Creators spend hours adapting one piece of content for multiple platforms.',
-    solution: [
-      'Paste blog/article → outputs LinkedIn posts in seconds',
-      'YouTube scripts, Instagram captions auto-generated',
-      'Platform-specific tone optimization',
-      '5 hours of work → 5 minutes',
-    ],
-    impact: 'Creators create more, stress less.',
-    stack: 'Python · Claude API · Make.com',
+    name: 'Content Agent',
+    desc: 'Content repurposing across platforms',
+    link: 'https://cra1.vercel.app/',
+    color: '#F59E0B', // Amber
   },
   {
     id: 6,
-    name: 'AI Research Team (3-Agent)',
-    client: 'Small Businesses',
-    type: 'AI Agents',
-    tag: 'AGENTIC TEAM',
-    color: '#A78BFA',
-    problem: "Small businesses can't afford full research teams.",
-    solution: [
-      'Deploy a 3-agent team: Researcher + Strategist + Critic',
-      'Works 24/7 — no sick days, no office politics',
-      'Analyzes documents, generates summaries',
-      'Provides strategic insights on demand',
-    ],
-    impact: 'Small businesses get enterprise-level research at startup budgets.',
-    stack: 'Claude API · Python · Agent Orchestration',
+    name: 'AI Research',
+    desc: 'Multi-agent research and strategy team',
+    link: '#',
+    color: '#6366F1', // Indigo
   },
 ]
 
-const filters = ['All', 'Websites', 'AI Agents', 'Apps']
-
-function ProjectCard({ project, i }) {
-  const [expanded, setExpanded] = useState(false)
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.2 })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      layout
-    >
-      <motion.div
-        layout
-        onClick={() => setExpanded(!expanded)}
-        className="relative rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden cursor-pointer group"
-        whileHover={{ borderColor: `${project.color}40`, background: `${project.color}08` }}
-        transition={{ duration: 0.2 }}
-      >
-        {/* Top accent line */}
-        <div className="h-0.5 w-full" style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }} />
-
-        <div className="p-6">
-          {/* Header */}
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <div>
-              <span className="text-[10px] tracking-[0.2em] font-bold px-2.5 py-1 rounded-full mb-3 inline-block"
-                style={{ color: project.color, background: `${project.color}18` }}
-              >
-                {project.tag}
-              </span>
-              <h3 className="font-cossette font-bold text-xl text-white group-hover:text-violet-300 transition-colors">
-                {project.name}
-              </h3>
-              <p className="text-white/40 text-sm mt-1">Client: {project.client}</p>
-            </div>
-            <motion.div
-              animate={{ rotate: expanded ? 45 : 0 }}
-              className="flex-shrink-0 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:border-violet-500/40 group-hover:text-violet-400 transition-all"
-            >
-              +
-            </motion.div>
-          </div>
-
-          {/* Problem preview */}
-          <p className="text-white/40 text-sm leading-relaxed line-clamp-2">{project.problem}</p>
-
-          {/* Expanded content */}
-          <AnimatePresence>
-            {expanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-5 space-y-4">
-                  <div>
-                    <p className="text-xs tracking-widest text-violet-400/60 uppercase mb-2">Solution</p>
-                    <ul className="space-y-1.5">
-                      {project.solution.map((s, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-white/60 text-sm">
-                          <span className="text-violet-400 mt-0.5 flex-shrink-0">→</span>
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="p-4 rounded-xl" style={{ background: `${project.color}10`, border: `1px solid ${project.color}20` }}>
-                    <p className="text-xs tracking-widest uppercase mb-1" style={{ color: project.color }}>Impact</p>
-                    <p className="text-white/80 text-sm">{project.impact}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs tracking-widest text-white/20 uppercase mb-1.5">Stack</p>
-                    <p className="text-white/40 text-xs">{project.stack}</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
 export default function Portfolio() {
-  const [activeFilter, setActiveFilter] = useState('All')
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.1 })
-
-  const filtered = activeFilter === 'All'
-    ? projects
-    : projects.filter((p) => p.type === activeFilter)
-
+  const [hoveredId, setHoveredId] = useState(null)
+  
+  // To handle responsive node positions, we'll calculate coordinates based on a circle
+  // We'll use a fixed radius in a square container for simplicity on both mobile and desktop,
+  // or a vertical stack on mobile. Let's use a vertical stack on mobile and radial on md+.
+  
   return (
-    <section id="portfolio" className="relative bg-black py-28 overflow-hidden">
-      <div className="absolute left-0 bottom-0 w-96 h-96 pointer-events-none"
-        style={{ background: 'radial-gradient(circle at bottom left, rgba(139,92,246,0.07) 0%, transparent 70%)' }}
-      />
-
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6">
+    <section id="portfolio" className="relative bg-black py-24 min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="relative z-10 max-w-6xl w-full mx-auto px-6 mb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4"
         >
-          Our Work
+          Our Portfolio
         </motion.div>
-
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cossette font-bold text-[clamp(2rem,5vw,4rem)] leading-tight text-white mb-4"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="font-cossette font-bold text-4xl md:text-5xl leading-tight text-white mb-4"
         >
-          Real Solutions.
-          <br />
-          <span className="gradient-text">Real Impact. Real Results.</span>
+          An Ecosystem of <span className="gradient-text">Innovation</span>
         </motion.h2>
-
-        {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex gap-2 flex-wrap mb-12 mt-8"
-        >
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActiveFilter(f)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeFilter === f
-                  ? 'bg-violet-600 text-white shadow-[0_0_20px_rgba(139,92,246,0.4)]'
-                  : 'border border-white/10 text-white/50 hover:border-violet-500/30 hover:text-white/80'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} i={i} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
       </div>
+
+      {/* Interactive Radial Map */}
+      <div className="relative w-full max-w-5xl mx-auto aspect-square md:aspect-[16/9] flex items-center justify-center hidden md:flex">
+        {/* SVG Lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+          {projects.map((p, i) => {
+            const angle = (i * (360 / projects.length)) * (Math.PI / 180);
+            const rX = 40; // radius percentage X
+            const rY = 35; // radius percentage Y
+            const x = 50 + rX * Math.cos(angle);
+            const y = 50 + rY * Math.sin(angle);
+            
+            return (
+              <motion.line
+                key={`line-${p.id}`}
+                x1="50%"
+                y1="50%"
+                x2={`${x}%`}
+                y2={`${y}%`}
+                stroke={hoveredId === p.id || hoveredId === null ? p.color : '#333'}
+                strokeWidth={hoveredId === p.id ? 3 : 1.5}
+                opacity={hoveredId === p.id ? 0.8 : 0.3}
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
+              />
+            )
+          })}
+        </svg>
+
+        {/* Central Sun */}
+        <motion.div 
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          className="absolute z-20 w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-yellow-300 via-orange-500 to-red-600 shadow-[0_0_80px_rgba(245,158,11,0.5)] flex items-center justify-center p-1"
+          style={{
+            animation: 'pulse-sun 4s infinite alternate'
+          }}
+        >
+          <div className="w-full h-full rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 text-center p-4 cursor-default">
+            <span className="font-bold text-white text-lg md:text-xl tracking-wide drop-shadow-lg">23rd Gen<br/>Hub</span>
+          </div>
+        </motion.div>
+
+        {/* Nodes */}
+        {projects.map((p, i) => {
+          const angle = (i * (360 / projects.length)) * (Math.PI / 180);
+          const rX = 40;
+          const rY = 35;
+          const x = 50 + rX * Math.cos(angle);
+          const y = 50 + rY * Math.sin(angle);
+
+          return (
+            <motion.a
+              href={p.link !== '#' ? p.link : undefined}
+              target={p.link !== '#' ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              key={p.id}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 100, delay: 0.8 + i * 0.1 }}
+              onMouseEnter={() => setHoveredId(p.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 group"
+              style={{ left: `${x}%`, top: `${y}%` }}
+            >
+              {/* Curvy highly-animated button */}
+              <div 
+                className="relative px-6 py-4 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-300 cursor-pointer overflow-hidden flex flex-col items-center min-w-[160px] text-center"
+                style={{ 
+                  boxShadow: hoveredId === p.id ? `0 0 30px ${p.color}40` : 'none',
+                  borderColor: hoveredId === p.id ? `${p.color}80` : 'rgba(255,255,255,0.1)'
+                }}
+              >
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(45deg, ${p.color}, transparent)` }}
+                />
+                
+                <h3 className="font-bold text-white text-base whitespace-nowrap z-10 group-hover:scale-105 transition-transform">{p.name}</h3>
+                
+                <motion.div 
+                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                  animate={{ 
+                    height: hoveredId === p.id ? 'auto' : 0, 
+                    opacity: hoveredId === p.id ? 1 : 0,
+                    marginTop: hoveredId === p.id ? 8 : 0
+                  }}
+                  className="overflow-hidden z-10"
+                >
+                  <p className="text-white/70 text-xs w-40 leading-relaxed">
+                    {p.desc}
+                  </p>
+                  <div className="mt-3 text-[10px] uppercase tracking-widest font-bold" style={{ color: p.color }}>
+                    Explore →
+                  </div>
+                </motion.div>
+
+                {/* Node glowing orb indicator */}
+                <div 
+                  className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full animate-pulse"
+                  style={{ backgroundColor: p.color, boxShadow: `0 0 10px ${p.color}` }}
+                />
+              </div>
+            </motion.a>
+          )
+        })}
+      </div>
+
+      {/* Mobile view (List format with curvy aesthetic) */}
+      <div className="md:hidden flex flex-col gap-6 w-full max-w-sm mx-auto px-6 z-10">
+        <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-300 via-orange-500 to-red-600 shadow-[0_0_40px_rgba(245,158,11,0.5)] flex items-center justify-center p-1" style={{ animation: 'pulse-sun 4s infinite alternate' }}>
+          <div className="w-full h-full rounded-full bg-black/40 backdrop-blur flex items-center justify-center border border-white/20">
+            <span className="font-bold text-white text-sm text-center">23rd<br/>Gen</span>
+          </div>
+        </div>
+
+        {projects.map((p, i) => (
+          <motion.a
+            key={p.id}
+            href={p.link !== '#' ? p.link : undefined}
+            target={p.link !== '#' ? "_blank" : undefined}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="relative p-6 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden"
+            style={{ borderLeftColor: p.color, borderLeftWidth: '4px' }}
+          >
+            <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at right, ${p.color}, transparent 70%)` }} />
+            <h3 className="font-bold text-white text-lg mb-2 relative z-10">{p.name}</h3>
+            <p className="text-white/60 text-sm relative z-10 mb-4">{p.desc}</p>
+            <div className="text-xs uppercase tracking-widest font-bold flex items-center gap-2 relative z-10" style={{ color: p.color }}>
+              Explore <span className="text-lg leading-none">→</span>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes pulse-sun {
+          0% { transform: scale(1); box-shadow: 0 0 60px rgba(245,158,11,0.4); }
+          100% { transform: scale(1.05); box-shadow: 0 0 100px rgba(245,158,11,0.7); }
+        }
+      `}</style>
     </section>
   )
 }

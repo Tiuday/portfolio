@@ -1,85 +1,86 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const links = [
-  { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Work', href: '#portfolio' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Privacy', href: '#' },
 ]
 
 export default function Footer() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
-    <footer className="relative bg-black border-t border-white/5 pt-16 pb-8 overflow-hidden">
-      {/* Subtle top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent)' }}
-      />
+    <footer ref={ref} className="relative bg-black overflow-hidden border-t border-white/5">
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-12 mb-14">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-violet-900 flex items-center justify-center text-xs font-bold">
-                23
-              </div>
-              <span className="font-cossette font-bold text-lg text-white">23rd Gen</span>
-            </div>
-            <p className="text-white/30 text-sm leading-relaxed max-w-xs">
-              Designed to give you your time back. AI agents & beautiful web experiences
-              that actually change lives.
-            </p>
-          </div>
+      {/* Top bar — cities / tagline strip */}
+      <div className="border-b border-white/5 px-6 py-3 flex items-center justify-between text-[10px] tracking-[0.25em] uppercase text-white/20">
+        <span>AI Agents</span>
+        <span>Web Development</span>
+        <span>Automation</span>
+        <span>India</span>
+      </div>
 
-          {/* Navigation */}
-          <div>
-            <p className="text-white/20 text-xs tracking-widest uppercase mb-4">Navigation</p>
-            <div className="flex flex-col gap-2">
-              {links.map((l) => (
-                <a key={l.label} href={l.href}
-                  className="text-white/50 hover:text-violet-400 text-sm transition-colors duration-200"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          </div>
+      {/* Massive brand name — Cassette-style */}
+      <div className="relative px-4 pt-8 pb-2 overflow-hidden">
+        <motion.h2
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="font-cossette font-bold leading-none select-none"
+          style={{
+            fontSize: 'clamp(4rem, 18vw, 18rem)',
+            background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 40%, #2E1065 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          23rd Gen
+        </motion.h2>
 
-          {/* Contact */}
-          <div>
-            <p className="text-white/20 text-xs tracking-widest uppercase mb-4">Contact</p>
-            <div className="space-y-2">
-              <a href="mailto:work23rdgen@gmail.com"
-                className="flex items-center gap-2 text-white/50 hover:text-violet-400 text-sm transition-colors">
-                <span className="text-violet-500/60">✉</span> work23rdgen@gmail.com
-              </a>
-              <a href="https://instagram.com/weare23rdgen" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/50 hover:text-violet-400 text-sm transition-colors">
-                <span className="text-violet-500/60">📸</span> @weare23rdgen
-              </a>
-              <a href="https://wa.me/919054406141" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/50 hover:text-violet-400 text-sm transition-colors">
-                <span className="text-violet-500/60">💬</span> +91 90544 06141
-              </a>
-            </div>
-          </div>
-        </div>
+        {/* Subtle bottom glow behind text */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-24 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%)', filter: 'blur(20px)' }}
+        />
+      </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
-          <p className="text-white/20 text-sm">
-            23rd Gen © 2025 — Giving more time isn't important; giving QUALITY time is.
-          </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-white/20 hover:text-white/40 text-xs transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/20 hover:text-white/40 text-xs transition-colors">Terms of Service</a>
-          </div>
-        </div>
+      {/* Bottom row */}
+      <div className="px-6 pb-8 pt-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-t border-white/5">
 
-        <p className="text-center text-white/10 text-xs mt-6">
-          Built with love by 23rd Gen
-        </p>
+        {/* Nav links as pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap gap-2"
+        >
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="px-4 py-1.5 rounded-full border border-white/10 text-white/40 text-xs hover:border-violet-500/40 hover:text-violet-300 transition-all duration-200"
+            >
+              {l.label}
+            </a>
+          ))}
+        </motion.div>
+
+        {/* Tagline + copyright */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-right"
+        >
+          <p className="text-white/50 text-sm font-medium">Giving quality time back.</p>
+          <p className="text-white/20 text-xs mt-1">23rd Gen © 2025</p>
+        </motion.div>
       </div>
     </footer>
   )

@@ -30,7 +30,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">
-          <img src="/logo.png" alt="23rd Gen Logo" className="w-10 h-10 object-contain" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-violet-900 flex items-center justify-center text-xs font-bold tracking-tighter">
+            23
+          </div>
           <span className="font-bold text-lg tracking-tight text-white group-hover:text-violet-400 transition-colors">
             23rd Gen
           </span>
