@@ -141,15 +141,19 @@ export default function Contact() {
                 <p className="text-white/50">We'll get back to you within 24 hours.</p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form action="https://api.web3forms.com/submit" method="POST" className="space-y-4">
+                {/* Replace YOUR_ACCESS_KEY_HERE with your access key from https://web3forms.com/ */}
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+                <input type="hidden" name="subject" value="New Lead from 23rd Gen Website" />
+                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+                
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-white/30 text-xs tracking-widest uppercase mb-2 block">Name</label>
                     <input
                       type="text"
+                      name="name"
                       required
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-colors text-sm"
                       placeholder="Your name"
                     />
@@ -158,9 +162,8 @@ export default function Contact() {
                     <label className="text-white/30 text-xs tracking-widest uppercase mb-2 block">Email</label>
                     <input
                       type="email"
+                      name="email"
                       required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-colors text-sm"
                       placeholder="your@email.com"
                     />
@@ -170,8 +173,7 @@ export default function Contact() {
                 <div>
                   <label className="text-white/30 text-xs tracking-widest uppercase mb-2 block">Business Type</label>
                   <select
-                    value={form.type}
-                    onChange={(e) => setForm({ ...form, type: e.target.value })}
+                    name="business_type"
                     className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white focus:outline-none focus:border-violet-500/50 transition-colors text-sm appearance-none"
                     style={{ colorScheme: 'dark' }}
                   >
@@ -185,10 +187,9 @@ export default function Contact() {
                 <div>
                   <label className="text-white/30 text-xs tracking-widest uppercase mb-2 block">Message</label>
                   <textarea
+                    name="message"
                     required
                     rows={4}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-colors text-sm resize-none"
                     placeholder="Tell us about your project or challenge..."
                   />
@@ -198,8 +199,7 @@ export default function Contact() {
                   <label className="text-white/30 text-xs tracking-widest uppercase mb-2 block">Preferred Contact</label>
                   <input
                     type="text"
-                    value={form.contact}
-                    onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                    name="preferred_contact"
                     className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-colors text-sm"
                     placeholder="Email / WhatsApp / Instagram"
                   />

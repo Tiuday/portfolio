@@ -3,27 +3,27 @@ import { motion, useInView } from 'framer-motion'
 
 const audiences = [
   {
-    icon: '📊',
-    title: 'Small Business Owners',
-    pain: 'Tired of dead workforce? Employees who drain money without moving the needle?',
-    solution: 'We give you agentic teams that increase revenue, reduce costs, and never complain.',
-    outcomes: ['More profit', 'More freedom', 'More family time'],
+    icon: '⚔️',
+    title: 'BUSINESS OWNERS',
+    pain: 'Tired of dead workforce? Employees draining gold without moving the needle?',
+    solution: 'Equip agentic teams that increase revenue, reduce costs, and never complain.',
+    outcomes: ['+ PROFIT', '+ FREEDOM', '+ STAMINA'],
     color: '#8B5CF6',
   },
   {
-    icon: '💼',
-    title: 'Working Professionals',
-    pain: 'Drowning in tasks? Juggling work and life like a circus act?',
+    icon: '🛡️',
+    title: 'PROFESSIONALS',
+    pain: 'Drowning in quests? Juggling work and life like a circus act?',
     solution: 'We build personalized management systems that organize your chaos.',
-    outcomes: ['Work smarter', 'Live fuller', 'Breathe easier'],
+    outcomes: ['+ EFFICIENCY', '+ LIFE', '+ FOCUS'],
     color: '#A78BFA',
   },
   {
-    icon: '🎨',
-    title: 'Creators & Personal Brands',
-    pain: 'Talented but buried in admin? Great at your craft but terrible at lead management?',
+    icon: '✨',
+    title: 'CREATORS & BRANDS',
+    pain: 'Talented but buried in admin? Great at your craft but terrible at leads?',
     solution: 'We automate the boring stuff so you can focus on your art.',
-    outcomes: ['More creativity', 'More clients', 'More revenue'],
+    outcomes: ['+ CREATIVITY', '+ CLIENTS', '+ MANA'],
     color: '#C4B5FD',
   },
 ]
@@ -33,106 +33,104 @@ export default function Impact() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
   return (
-    <section id="impact" className="relative bg-black py-28 overflow-hidden">
-      {/* Ambient */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(46,16,101,0.15) 0%, transparent 70%)' }}
-      />
+    <section id="impact" className="relative bg-[#020205] py-28 overflow-hidden" style={{ imageRendering: 'pixelated' }}>
+      {/* Pixelated background pattern */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+           style={{ backgroundImage: 'repeating-linear-gradient(45deg, #8B5CF6 25%, transparent 25%, transparent 75%, #8B5CF6 75%, #8B5CF6), repeating-linear-gradient(45deg, #8B5CF6 25%, transparent 25%, transparent 75%, #8B5CF6 75%, #8B5CF6)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }} />
 
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6">
+      <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4"
+          className="text-center mb-16"
         >
-          Why Work With Us
+          <div className="text-violet-400 text-xs sm:text-sm tracking-[0.2em] uppercase mb-4" style={{ fontFamily: '"Press Start 2P", monospace' }}>
+            *** CHOOSE YOUR DESTINY ***
+          </div>
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl text-white leading-loose" style={{ fontFamily: '"Press Start 2P", monospace', lineHeight: '1.6' }}>
+            THIS ISN'T ABOUT BUSINESS.<br/>
+            IT'S ABOUT YOUR <span className="text-red-500 animate-pulse">LIFE</span>.
+          </h2>
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cossette font-bold text-[clamp(2rem,5vw,4rem)] leading-tight text-white mb-6"
-        >
-          This Isn't About Your Business.
-          <br />
-          <span className="gradient-text">It's About Your LIFE.</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2 }}
-          className="text-white/40 text-lg mb-16 max-w-xl"
-        >
-          We work with three types of game-changers.
-        </motion.p>
-
-        {/* Audience cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        {/* Character/Audience Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
           {audiences.map((a, i) => (
             <motion.div
               key={a.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative p-7 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 overflow-hidden"
-              whileHover={{ y: -4 }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="relative p-6 sm:p-8 bg-black border-4 group hover:-translate-y-2 transition-transform duration-300"
+              style={{ 
+                borderColor: 'white',
+                boxShadow: `8px 8px 0 0 ${a.color}80`,
+                fontFamily: '"Press Start 2P", monospace'
+              }}
             >
-              {/* Top glow */}
-              <div className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: `linear-gradient(90deg, transparent, ${a.color}, transparent)` }}
-              />
+              {/* Scanline */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none opacity-50 z-20" />
+              
+              <div className="relative z-10">
+                <div className="text-4xl mb-6 text-center">{a.icon}</div>
+                <h3 className="text-sm sm:text-base text-center mb-6" style={{ color: a.color }}>{a.title}</h3>
+                
+                <div className="mb-6">
+                  <p className="text-[9px] sm:text-[10px] text-red-400 leading-relaxed mb-4">
+                    <span className="text-white">WARNING: </span>{a.pain}
+                  </p>
+                  <p className="text-[9px] sm:text-[10px] text-green-400 leading-relaxed">
+                    <span className="text-white">SOLUTION: </span>{a.solution}
+                  </p>
+                </div>
 
-              <div className="text-3xl mb-5">{a.icon}</div>
-              <h3 className="font-cossette font-bold text-xl text-white mb-3">{a.title}</h3>
-              <p className="text-white/40 text-sm leading-relaxed mb-4">{a.pain}</p>
-              <p className="text-white/60 text-sm leading-relaxed mb-5">{a.solution}</p>
-
-              {/* Outcomes */}
-              <div className="space-y-1.5">
-                {a.outcomes.map((o) => (
-                  <div key={o} className="flex items-center gap-2 text-sm" style={{ color: a.color }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: a.color }} />
-                    {o}
-                  </div>
-                ))}
+                {/* Loot/Outcomes */}
+                <div className="border-t-2 border-white/20 pt-4 mt-auto">
+                  <div className="text-[8px] text-white/50 mb-3">EXPECTED LOOT:</div>
+                  <ul className="space-y-2">
+                    {a.outcomes.map(o => (
+                      <li key={o} className="text-[10px] text-yellow-300">
+                        {o}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Promise block */}
+        {/* Boss Room / Promise block */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="relative p-10 md:p-14 rounded-3xl border border-violet-500/20 overflow-hidden text-center"
-          style={{ background: 'linear-gradient(135deg, rgba(46,16,101,0.3) 0%, rgba(10,0,30,0.5) 100%)' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="relative p-8 md:p-12 border-4 bg-black text-center"
+          style={{ 
+            borderColor: '#8B5CF6',
+            boxShadow: '0 0 40px rgba(139,92,246,0.3), inset 0 0 40px rgba(139,92,246,0.2)',
+            fontFamily: '"Press Start 2P", monospace'
+          }}
         >
-          {/* Glow */}
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.12) 0%, transparent 70%)' }}
-          />
-
-          <p className="text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-5">The 23rd Gen Promise</p>
-          <h3 className="font-cossette font-bold text-[clamp(1.8rem,4vw,3.5rem)] text-white leading-tight mb-6">
-            When you work with us,<br />
-            you're not buying a product.
+          <div className="text-yellow-400 text-xs sm:text-sm tracking-widest mb-6 animate-pulse">
+            ! THE 23RD GEN PROMISE !
+          </div>
+          <h3 className="text-sm sm:text-lg md:text-xl text-white leading-loose mb-8">
+            WHEN YOU WORK WITH US, YOU'RE NOT BUYING A PRODUCT.
           </h3>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-            You're buying back your <span className="text-violet-400 font-semibold">LIFE</span>.
-            You're choosing quality time over quantity time.
-            You're saying YES to what matters.
+          <p className="text-[10px] sm:text-xs text-white/70 leading-loose max-w-3xl mx-auto mb-10">
+            YOU'RE BUYING BACK YOUR <span className="text-violet-400">LIFE</span>. 
+            YOU'RE CHOOSING QUALITY TIME OVER QUANTITY TIME. 
+            PRESS START TO BEGIN.
           </p>
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(139,92,246,0.5)' }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-semibold transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block px-6 sm:px-8 py-4 bg-violet-600 text-white text-xs sm:text-sm border-2 border-white hover:bg-violet-500 transition-colors"
+            style={{ boxShadow: '4px 4px 0 0 white' }}
           >
-            I Want My Life Back
-            <span>→</span>
+            START GAME
           </motion.a>
         </motion.div>
       </div>
