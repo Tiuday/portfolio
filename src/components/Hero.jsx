@@ -148,16 +148,29 @@ export default function Hero() {
           AI Agents & Web Development
         </motion.div>
 
-        {/* Main headline */}
-        <div className="overflow-hidden mb-3">
-          <motion.h1
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+        {/* Huge brand name — Cassette-style */}
+        <div className="relative overflow-hidden mb-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-cossette font-bold text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-tight text-white"
+            className="font-cossette font-bold leading-none select-none"
+            style={{
+              fontSize: 'clamp(4rem, 15vw, 12rem)',
+              background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 40%, #2E1065 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              letterSpacing: '-0.03em',
+            }}
           >
-            We Don't Sell Websites.
-          </motion.h1>
+            23rd Gen
+          </motion.h2>
+          {/* Subtle bottom glow behind text */}
+          <div
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-24 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%)', filter: 'blur(20px)' }}
+          />
         </div>
         <div className="overflow-hidden mb-6">
           <motion.div

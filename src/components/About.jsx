@@ -92,16 +92,12 @@ export default function About() {
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-sm mx-auto md:mx-0"
               style={{ background: 'linear-gradient(135deg, rgba(46,16,101,0.8) 0%, rgba(10,0,30,0.9) 100%)' }}
             >
-              {/* Background pattern */}
-              <div className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: 'radial-gradient(circle at 30% 70%, rgba(139,92,246,1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(167,139,250,0.8) 0%, transparent 50%)',
-                }}
+              {/* Photo background */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: 'url("/nakshatra.jpeg")' }}
               />
-              {/* Large stylized "N" initial */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-cossette font-bold text-[12rem] text-violet-500/10 leading-none select-none">N</span>
-              </div>
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500" />
               {/* Info overlay at bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
                 <div className="font-cossette font-bold text-2xl text-white">Nakshatra Sharma</div>
@@ -116,7 +112,35 @@ export default function About() {
           </motion.div>
 
           {/* Right: Story */}
-          <div className="space-y-6">
+          <div className="space-y-6 relative">
+            {/* Interactive Floating Robot */}
+            <motion.div
+              animate={{ y: [-15, 5, -15], rotate: [-5, 5, -5] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="absolute -right-8 -top-12 w-24 h-24 md:w-32 md:h-32 opacity-80 cursor-pointer hidden md:flex items-center justify-center z-20"
+              whileHover={{ scale: 1.2, rotate: 0 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full filter drop-shadow-[0_0_15px_rgba(139,92,246,0.6)]">
+                {/* Antenna */}
+                <line x1="100" y1="40" x2="100" y2="20" stroke="#a78bfa" strokeWidth="4" strokeLinecap="round" />
+                <circle cx="100" cy="15" r="5" fill="#c4b5fd" className="animate-pulse" />
+                {/* Head */}
+                <rect x="60" y="40" width="80" height="60" rx="15" fill="#2e1065" stroke="#8b5cf6" strokeWidth="4" />
+                {/* Eyes */}
+                <rect x="75" y="55" width="20" height="10" rx="5" fill="#a78bfa" className="animate-pulse" />
+                <rect x="105" y="55" width="20" height="10" rx="5" fill="#a78bfa" className="animate-pulse" />
+                {/* Mouth */}
+                <path d="M 85 85 Q 100 95 115 85" stroke="#a78bfa" strokeWidth="3" fill="transparent" strokeLinecap="round" />
+                {/* Body */}
+                <path d="M 70 100 L 130 100 L 140 160 L 60 160 Z" fill="#4c1d95" stroke="#8b5cf6" strokeWidth="4" />
+                {/* Heart/Core */}
+                <circle cx="100" cy="130" r="12" fill="#c4b5fd" className="animate-pulse" />
+                {/* Arms */}
+                <path d="M 70 110 Q 40 130 50 160" stroke="#8b5cf6" strokeWidth="6" fill="transparent" strokeLinecap="round" />
+                <path d="M 130 110 Q 160 130 150 160" stroke="#8b5cf6" strokeWidth="6" fill="transparent" strokeLinecap="round" />
+              </svg>
+            </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
