@@ -27,13 +27,37 @@ const businessTypes = ['Small Business', 'Working Professional', 'Creator / Pers
 export default function Contact() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.15 })
-  const [form, setForm] = useState({ name: '', email: '', type: '', message: '', contact: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // In production, wire this to a backend / email service
-    setSubmitted(true)
+    setIsSubmitting(true)
+    setErrorMsg('')
+    
+    const formData = new FormData(e.target)
+    const data = Object.fromEntries(formData.entries())
+    
+    try {
+      const response = await fetch('https://hook.us2.make.com/haolfxy5w2qyebz4ar79m6pgmwkm5gkd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        setErrorMsg('Something went wrong. Please try again.')
+      }
+    } catch (err) {
+      setErrorMsg('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -141,11 +165,12 @@ export default function Contact() {
                 <p className="text-white/50">We'll get back to you within 24 hours.</p>
               </motion.div>
             ) : (
-              <form action="https://api.web3forms.com/submit" method="POST" className="space-y-4">
-                {/* Replace YOUR_ACCESS_KEY_HERE with your access key from https://web3forms.com/ */}
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-                <input type="hidden" name="subject" value="New Lead from 23rd Gen Website" />
-                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {errorMsg && (
+                  <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/50 text-red-400 text-sm">
+                    {errorMsg}
+                  </div>
+                )}
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -207,11 +232,16 @@ export default function Contact() {
 
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(139,92,246,0.5)' }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold transition-colors duration-200"
+                  disabled={isSubmitting}
+                  whileHover={!isSubmitting ? { scale: 1.02, boxShadow: '0 0 30px rgba(139,92,246,0.5)' } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                  className={`w-full py-4 rounded-xl font-semibold transition-colors duration-200 ${
+                    isSubmitting 
+                      ? 'bg-violet-600/50 text-white/50 cursor-not-allowed' 
+                      : 'bg-violet-600 hover:bg-violet-500 text-white'
+                  }`}
                 >
-                  Let's Transform Your Life →
+                  {isSubmitting ? 'Sending Transmission...' : "Let's Transform Your Life →"}
                 </motion.button>
               </form>
             )}
