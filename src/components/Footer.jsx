@@ -24,8 +24,23 @@ export default function Footer() {
         <span>India</span>
       </div>
 
-      {/* Simple padding to replace the huge text */}
-      <div className="relative px-4 pt-12 pb-4">
+      {/* Animated Pixel Marquee */}
+      <div className="relative overflow-hidden bg-violet-600/10 py-6 border-y border-violet-500/20 my-8">
+        <motion.div 
+          animate={{ x: [0, -1035] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 15 }}
+          className="flex whitespace-nowrap gap-8 items-center"
+        >
+          {/* We repeat the content multiple times to create a seamless loop */}
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8 font-pixel text-xl tracking-widest text-violet-400/80 uppercase">
+              <span>WE DON'T SELL WEBSITES</span>
+              <span className="text-white/30 text-xs">■</span>
+              <span>WE SELL YOUR TIME BACK</span>
+              <span className="text-white/30 text-xs">■</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Bottom row */}

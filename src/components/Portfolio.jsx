@@ -63,7 +63,7 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4"
+          className="font-pixel text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4"
         >
           Our Portfolio
         </motion.div>
@@ -72,7 +72,7 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="font-cossette font-bold text-4xl md:text-5xl leading-tight text-white mb-4"
+          className="font-pixel text-[clamp(1.5rem,3vw,3rem)] leading-tight text-white mb-4"
         >
           An Ecosystem of <span className="gradient-text">Innovation</span>
         </motion.h2>

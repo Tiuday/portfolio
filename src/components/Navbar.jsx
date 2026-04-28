@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">
-          <span className="font-bold text-lg tracking-tight text-white group-hover:text-violet-400 transition-colors">
+          <span className="font-cossette font-bold text-2xl tracking-tight text-white group-hover:text-violet-400 transition-colors mt-1">
             23rd Gen
           </span>
         </a>

@@ -16,6 +16,8 @@ export default {
       },
       fontFamily: {
         cossette: ['CossetteTexte', 'serif'],
+        pixel: ['"Press Start 2P"', 'monospace'],
+        pixelbody: ['"VT323"', 'monospace'],
       },
     },
   },

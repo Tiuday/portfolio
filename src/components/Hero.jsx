@@ -172,30 +172,31 @@ export default function Hero() {
             style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%)', filter: 'blur(20px)' }}
           />
         </div>
-        <div className="overflow-hidden mb-6">
+        {/* Main headline */}
+        <div className="overflow-hidden mb-3">
           <motion.div
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="font-cossette font-bold text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-tight flex items-center justify-center gap-4 flex-wrap"
+            className="font-pixel text-[clamp(1.5rem,3vw,3rem)] leading-[1.5] tracking-tight flex flex-col md:flex-row items-center justify-center gap-4 flex-wrap mt-8"
           >
-            <span className="text-white">We Sell Your</span>
+            <span className="text-white">WE SELL YOUR</span>
             {/* Cycling word */}
-            <span className="relative inline-block" style={{ minWidth: '240px' }}>
+            <span className="relative inline-block text-violet-400" style={{ minWidth: '180px' }}>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={cyclingWords[wordIdx]}
-                  initial={{ y: 60, opacity: 0, filter: 'blur(8px)' }}
-                  animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                  exit={{ y: -60, opacity: 0, filter: 'blur(8px)' }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="gradient-text inline-block glow-text"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="inline-block glow-text uppercase"
                 >
                   {cyclingWords[wordIdx]}
                 </motion.span>
               </AnimatePresence>
             </span>
-            <span className="text-white">Back.</span>
+            <span className="text-white">BACK.</span>
           </motion.div>
         </div>
 

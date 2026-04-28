@@ -32,7 +32,9 @@ html {
 body {
   background-color: #000000;
   color: #ffffff;
-  font-family: 'CossetteTexte', 'Inter', sans-serif;
+  font-family: 'VT323', monospace;
+  font-size: 1.25rem; /* VT323 needs to be larger to be readable */
+  letter-spacing: 0.05em;
   overflow-x: hidden;
   cursor: none;
 }

@@ -56,7 +56,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cossette font-bold text-[clamp(2rem,5vw,4rem)] leading-tight text-white mb-4"
+          className="font-pixel text-[clamp(1.5rem,3vw,3rem)] leading-[1.4] text-white mb-4"
         >
           Ready to Get
           <br />
@@ -137,7 +137,7 @@ export default function Contact() {
                 className="p-10 rounded-2xl border border-violet-500/20 bg-violet-500/5 text-center"
               >
                 <div className="text-5xl mb-4">✦</div>
-                <h3 className="font-cossette font-bold text-2xl text-white mb-2">Message Sent!</h3>
+                <h3 className="font-pixel text-xl md:text-2xl text-white mb-2">Message Sent!</h3>
                 <p className="text-white/50">We'll get back to you within 24 hours.</p>
               </motion.div>
             ) : (

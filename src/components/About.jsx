@@ -73,10 +73,10 @@ export default function About() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-cossette font-bold text-[clamp(2rem,5vw,4rem)] leading-tight text-white mb-16"
+          className="font-pixel text-[clamp(1.5rem,3vw,3rem)] leading-tight text-white mb-16"
         >
-          Meet the Mind<br />
-          <span className="gradient-text">Behind 23rd Gen</span>
+          Meet the Mind<br className="mb-2" />
+          <span className="gradient-text">Behind <span className="font-cossette font-bold text-[clamp(2.5rem,4vw,4rem)]">23rd Gen</span></span>
         </motion.h2>
 
         {/* Two column layout */}
@@ -211,8 +211,8 @@ export default function About() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4">Our Philosophy</div>
-            <h3 className="font-cossette font-bold text-[clamp(1.8rem,4vw,3rem)] text-white mb-8">
+            <div className="font-pixel text-violet-400/60 text-sm tracking-[0.3em] uppercase mb-4">Our Philosophy</div>
+            <h3 className="font-pixel text-[clamp(1.5rem,3vw,2.5rem)] text-white mb-8">
               What Makes Us Different?
             </h3>
           </motion.div>
